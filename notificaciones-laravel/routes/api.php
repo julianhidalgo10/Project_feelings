@@ -2,18 +2,23 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificacionController;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
+| Aquí es donde puedes registrar rutas para la API de Laravel. Estas rutas 
+| están cargadas por el RouteServiceProvider y todas estarán dentro del 
+| grupo de middleware "api".
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// 📌 Ruta de prueba para verificar que Laravel está respondiendo
+Route::get('/notificacion/test', function () {
+    return response()->json(["message" => "La API esta funcionando correctamente"], 200);
 });
+
+// 📌 Ruta principal para enviar notificaciones vía SMS con Twilio
+Route::post('/notificacion', [NotificacionController::class, 'enviarNotificacion']);
